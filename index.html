@@ -1,392 +1,1299 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>雷虎肯茲</title>
-  <meta name="description" content="雷虎肯茲 - Twitch、YouTube、賣場+、Cover" />
-  <meta property="og:title" content="雷虎肯茲" />
-  <meta property="og:description" content="雷虎肯茲 - Twitch、YouTube、賣場+ 、Cover" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://i.imgur.com/2ZC3F2i.png" />
-  <meta name="theme-color" content="#0ea5e9" />
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- V1 CSS（舊版：原本的樣式） -->
-  <style id="css-v1">
-    :root {
-      --bg: #0f172a;         
-      --card: #111827;       
-      --muted: #94a3b8;      
-      --text: #e2e8f0;        
-      --brand: #0ea5e9;    
-      --border: rgba(148,163,184,.25);
-      --radius: 18px;
-      --maxw: 1100px;
-    }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --border: rgba(2,6,23,.1); }
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body { font-family: "Zen Maru Gothic", "Segoe UI","微軟正黑體", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); }
-
-    .wrap { width: min(94vw, var(--maxw)); margin: 32px auto 56px; }
-    .section { background: var(--card); border:1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    .gap { height: 18px; }
-
-    .logoBox { display: grid; place-items: center; padding: 28px 20px; }
-    .logo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,.12); box-shadow: 0 6px 22px rgba(0,0,0,.25); }
-
-    .linksRow { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 720px) { .linksRow { grid-template-columns: repeat(3, 1fr); } }
-    .btn { font-size:20px;display:flex; align-items:center; justify-content:center; gap:10px; padding: 14px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
-    .btn:hover { transform: translateY(-1px); background:#273446; }
-    .linksRow .btn.iconbtn { padding: 16px; }
-    .icon { width: 22px; height: 22px; display: block; fill: currentColor; }
-
-    .iconbtn.-tw { color: #a970ff; }   
-    .iconbtn.-yt { color: #ff0033; }   
-    .iconbtn.-shop { color: #22c55e; } 
-    .linksRow .btn.iconbtn { padding: 16px; }
-    .icon-img { width: 24px; height: 24px; display:block; }
-    
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-    .linksRow .btn.iconbtn { padding: 12px 16px; gap: 10px; }
-    .icon { width: 24px; height: 24px; display:block; }
-    .label { font-weight: 700; letter-spacing: .2px; }
-
-    .twoCol { display:grid; gap: 16px; }
-    @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
-    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; text-align: center;}
-
-    .carousel { position: relative; }
-    .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 6px; }
-    .card { flex: 0 0 clamp(70%, 420px, 90%); scroll-snap-align:start; border:1px solid var(--border); background:#0b1220; border-radius: 16px; overflow: hidden; }
-    @media (min-width: 720px) { .card { flex-basis: 60%; } }
-    @media (min-width: 1100px) { .card { flex-basis: 60%; } }
-    .thumb { position: relative; aspect-ratio: 16/9; width: 100%; background:#0a0f1c; display:block; }
-    .thumb > img { width:100%; height:100%; object-fit: cover; display:block; }
-    .meta { padding: 12px; }
-    .title { font-size: 16px; line-height: 1.35; margin: 0 0 6px; }
-    .meta small { color: var(--muted); }
-    .navBtn { position:absolute; top: 42%; transform: translateY(-50%); border:1px solid var(--border); background: rgba(15,23,42,.6); color:#e5e7eb; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); }
-    .navPrev { left: -6px; } .navNext { right: -6px; }
-
-    .ratio { position: relative; width: 100%; aspect-ratio: 16/9; background:#0b1220; border:1px solid var(--border); border-radius: 16px; overflow:hidden; }
-    .ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-    .grid3 { display:grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 720px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1040px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
-    .vcell { border:1px solid var(--border); border-radius: 16px; overflow:hidden; background:#0b1220; }
-    .vcell .thumb { display:block; }
-    .vcell .meta { padding: 10px 12px; }
-    .more { display:flex; justify-content:center; margin-top:10px; }
-    .footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
-  
-    .carousel .track{ display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 0; scrollbar-width: none; -ms-overflow-style: none; }
-    .carousel .track::-webkit-scrollbar{ height:0 }
-    .carousel:hover .track,
-    .carousel:focus-within .track{ padding-bottom: 6px; scrollbar-width: thin; }
-    .carousel:hover .track::-webkit-scrollbar,
-    .carousel:focus-within .track::-webkit-scrollbar{ height: 8px; }
-    .carousel:hover .track::-webkit-scrollbar-thumb,
-    .carousel:focus-within .track::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.5); border-radius: 999px; }
-    .carousel:hover .track::-webkit-scrollbar-track,
-    .carousel:focus-within .track::-webkit-scrollbar-track{ background: transparent; }
-    
-    .carousel .navBtn{ opacity:0; pointer-events:none; transition:opacity .2s }
-    .carousel:hover .navBtn{ opacity:1; pointer-events:auto }
-    a.card, a.vcell { text-decoration: none; color: inherit; }
-    a.card:link, a.card:visited, a.card:hover, a.card:active,
-    a.vcell:link, a.vcell:visited, a.vcell:hover, a.vcell:active { text-decoration: none; }
-    .card .meta a, .vcell .meta a { text-decoration: none; color: inherit; } 
-    
-    .section.twoCol > * { min-width: 0; }
-    .ratio { width: 100%; aspect-ratio: 16/9; }
-    .ratio iframe { width: 100% !important; height: 100% !important; display: block; border: 0; }
-    
-    @supports not (aspect-ratio: 16/9) {
-      .ratio { position: relative; height: 0; padding-top: 56.25%; }
-      .ratio iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
-    }
-
-    .section.twoCol > * { min-width: 0; }
-    
-    .carousel, .carousel .track { min-width: 0; }
-    a.card, a.vcell { display: block; max-width: 100%; } 
-    .card { max-width: 100%; }                            
-    
-    .card .thumb, .vcell .thumb { width: 100%; }
-    .card .thumb img, .vcell .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    
-    .title { overflow-wrap: anywhere; word-break: break-word; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    
-    @media (max-width: 380px){ .carousel .card { flex-basis: 100%; } }
-    .linksRow .btn.iconbtn{ display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 10px; padding: 12px 16px; }
-    .icon, .icon-img{ width:24px; height:24px; display:block; }
-    .label{ justify-self: center; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  </style>
-
-  <!-- V2 CSS（新樣式，可以自己調整） -->
-  <style id="css-v2" disabled>
-    body { background:#ffffff; color:#111827; font-family: "Zen Maru Gothic", sans-serif; }
-    .section { background:#f1f5f9; border:1px solid rgba(0,0,0,.15); border-radius:12px; padding:20px; }
-    .btn { background:#22c55e; color:white; border-radius:12px; padding:12px 16px; text-decoration:none; }
-    .btn:hover { background:#16a34a; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <section class="section">
-      <div class="linksRow">
-        <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch" style="color:#9146FF">
-          <img class="icon" src="https://cdn.simpleicons.org/twitch/9146FF" alt="">
-          <span class="label">Twitch 頻道 (每晚七點開台)</span>
-        </a>
-        <a class="btn iconbtn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube" style="color:#FF0000">
-          <img class="icon" src="https://cdn.simpleicons.org/youtube/FF0000" alt="">
-          <span class="label">YT 頻道 (Cover與活動記錄)</span>
-        </a>
-        <a class="btn iconbtn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener" aria-label="賣場＋" style="color:#22c55e">
-          <img class="icon" src="https://api.iconify.design/lucide:shopping-bag.svg" alt="">
-          <span class="label">雷虎雜貨舖 好賣+分店</span>
-        </a>
-      </div>
-    </section>
-    <div class="gap"></div>
-    <h2 class="h2">最新YT影片 & Twitch直播</h2>
-    <section class="section twoCol">
-      <div>
-        <div class="carousel">
-          <div class="track" id="yt-track"></div>
-        </div>
-      </div>
-      <div>
-        <div class="ratio">
-          <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" title="Twitch Player"></iframe>
-        </div>
-      </div>
-    </section>
-    <div class="gap"></div>
-    <h2 class="h2">Cover</h2>
-    <section class="section" id="pl-section">
-      <div class="grid3" id="pl-grid"></div>
-      <div class="more"><button class="btn" id="pl-more" style="display:none">載入更多</button></div>
-    </section>
-  </div>
-
-  <!-- 切換 CSS -->
-  <script>
-    (function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const v = urlParams.get("v") || "1";  // 沒有 v → 預設 "1"
-      document.getElementById("css-v1").disabled = (v !== "1");
-      document.getElementById("css-v2").disabled = (v !== "2");
-    })();
-  </script>
-  <script>
-    const CONFIG = {
-      logoUrl: '', 
-      twitchChannel: 'leihustore',
-      playlist: {
-        id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny', 
-        pageSize: 20                                 
-      },
-      youtube: {
-        channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
-        apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg', 
-        maxResults: 15,
-        manualVideoIds: [
-          'T9UcKMO3tKc','K9urc-JaKO8','4eYiLJh3dzg','0l1d1z2W19o','RZNY-lcLUrk','5gjwjCB1Y4E'
-        ]
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>雷虎肯茲</title>
+    <meta name="description" content="雷虎肯茲 - Twitch、YouTube、賣場+、Cover" />
+    <meta property="og:title" content="雷虎肯茲" />
+    <meta property="og:description" content="雷虎肯茲 - Twitch、YouTube、賣場+ 、Cover" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://i.imgur.com/2ZC3F2i.png" />
+    <meta name="theme-color" content="#0ea5e9" />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- V1 CSS（舊版：原本的樣式） -->
+    <style id="css-v1">
+      :root {
+        --bg: #0f172a;
+        --card: #111827;
+        --muted: #94a3b8;
+        --text: #e2e8f0;
+        --brand: #0ea5e9;
+        --border: rgba(148, 163, 184, .25);
+        --radius: 18px;
+        --maxw: 1100px;
       }
-    };
 
-    if (CONFIG.logoUrl) {
-      document.getElementById('logo').src = CONFIG.logoUrl;
-    }
-    async function fetchPlaylistPage(pageToken){
-      const pl = CONFIG.playlist || {};
-      const key = (CONFIG.youtube||{}).apiKey;
-      if (!pl.id || !key) return { items: [], nextPageToken: null };
-    
-      const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
-      url.searchParams.set('key', key);
-      url.searchParams.set('playlistId', pl.id);
-      url.searchParams.set('part', 'snippet,contentDetails');
-      url.searchParams.set('maxResults', String(Math.min(pl.pageSize||9, 50)));
-      if (pageToken) url.searchParams.set('pageToken', pageToken);
-    
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('YouTube API 錯誤');
-      const data = await res.json();
-      const items = (data.items||[]).map(v => ({
-        id: (v.contentDetails || v.snippet?.resourceId)?.videoId,
-        title: v.snippet?.title || 'YouTube 影片'
-      })).filter(x=>x.id);
-      return { items, nextPageToken: data.nextPageToken || null };
-    }
-    (function initTwitch(){
-      const parent = location.hostname || 'www.example.com';
-      const src = new URL('https://player.twitch.tv/');
-      src.searchParams.set('channel', CONFIG.twitchChannel);
-      src.searchParams.set('parent', parent);
-      src.searchParams.set('autoplay', 'false');
-      src.searchParams.set('muted', 'true');
-      document.getElementById('twitchPlayer').src = src.toString();
-    })();
-
-    async function fetchLatestVideoIds(){
-      const { apiKey, channelId, maxResults, manualVideoIds } = CONFIG.youtube;
-      if (!apiKey) {
-        return manualVideoIds.map(id => ({ id, title: '' }));
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8fafc;
+          --card: #ffffff;
+          --text: #0f172a;
+          --muted: #475569;
+          --border: rgba(2, 6, 23, .1);
+        }
       }
-      try {
-        const url = new URL('https://www.googleapis.com/youtube/v3/search');
-        url.searchParams.set('key', apiKey);
-        url.searchParams.set('channelId', channelId);
-        url.searchParams.set('part', 'snippet');
-        url.searchParams.set('order', 'date');
-        url.searchParams.set('type', 'video');
-        url.searchParams.set('maxResults', String(maxResults));
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('YouTube API 錯誤');
-        const data = await res.json();
-        return data.items
-          .map(v => ({
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Zen Maru Gothic", "Segoe UI", "微軟正黑體", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .wrap {
+        width: min(94vw, var(--maxw));
+        margin: 32px auto 56px;
+      }
+
+      .section {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+      }
+
+      .gap {
+        height: 18px;
+      }
+
+      .logoBox {
+        display: grid;
+        place-items: center;
+        padding: 28px 20px;
+      }
+
+      .logo {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255, 255, 255, .12);
+        box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
+      }
+
+      .linksRow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 720px) {
+        .linksRow {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .btn {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: #1f2937;
+        color: #e5e7eb;
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        transition: transform .06s ease, background .2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: #273446;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 16px;
+      }
+
+      .icon {
+        width: 22px;
+        height: 22px;
+        display: block;
+        fill: currentColor;
+      }
+
+      .iconbtn.-tw {
+        color: #a970ff;
+      }
+
+      .iconbtn.-yt {
+        color: #ff0033;
+      }
+
+      .iconbtn.-shop {
+        color: #22c55e;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 16px;
+      }
+
+      .icon-img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 12px 16px;
+        gap: 10px;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .label {
+        font-weight: 700;
+        letter-spacing: .2px;
+      }
+
+      .twoCol {
+        display: grid;
+        gap: 16px;
+      }
+
+      @media (min-width: 980px) {
+        .twoCol {
+          grid-template-columns: 1.2fr 1fr;
+        }
+      }
+
+      .h2 {
+        margin: 0 0 10px;
+        font-size: clamp(18px, 2.4vw, 22px);
+        letter-spacing: .5px;
+        text-align: center;
+      }
+
+      .carousel {
+        position: relative;
+      }
+
+      .track {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 6px;
+      }
+
+      .card {
+        flex: 0 0 clamp(70%, 420px, 90%);
+        scroll-snap-align: start;
+        border: 1px solid var(--border);
+        background: #0b1220;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      @media (min-width: 720px) {
+        .card {
+          flex-basis: 60%;
+        }
+      }
+
+      @media (min-width: 1100px) {
+        .card {
+          flex-basis: 60%;
+        }
+      }
+
+      .thumb {
+        position: relative;
+        aspect-ratio: 16/9;
+        width: 100%;
+        background: #0a0f1c;
+        display: block;
+      }
+
+      .thumb>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .meta {
+        padding: 12px;
+      }
+
+      .title {
+        font-size: 16px;
+        line-height: 1.35;
+        margin: 0 0 6px;
+      }
+
+      .meta small {
+        color: var(--muted);
+      }
+
+      .navBtn {
+        position: absolute;
+        top: 42%;
+        transform: translateY(-50%);
+        border: 1px solid var(--border);
+        background: rgba(15, 23, 42, .6);
+        color: #e5e7eb;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        backdrop-filter: blur(6px);
+      }
+
+      .navPrev {
+        left: -6px;
+      }
+
+      .navNext {
+        right: -6px;
+      }
+
+      .ratio {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #0b1220;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .ratio iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 720px) {
+        .grid3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1040px) {
+        .grid3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .vcell {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #0b1220;
+      }
+
+      .vcell .thumb {
+        display: block;
+      }
+
+      .vcell .meta {
+        padding: 10px 12px;
+      }
+
+      .more {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 18px;
+      }
+
+      .carousel .track {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .carousel .track::-webkit-scrollbar {
+        height: 0
+      }
+
+      .carousel:hover .track,
+      .carousel:focus-within .track {
+        padding-bottom: 6px;
+        scrollbar-width: thin;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar,
+      .carousel:focus-within .track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar-thumb,
+      .carousel:focus-within .track::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, .5);
+        border-radius: 999px;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar-track,
+      .carousel:focus-within .track::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .carousel .navBtn {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s
+      }
+
+      .carousel:hover .navBtn {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      a.card,
+      a.vcell {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a.card:link,
+      a.card:visited,
+      a.card:hover,
+      a.card:active,
+      a.vcell:link,
+      a.vcell:visited,
+      a.vcell:hover,
+      a.vcell:active {
+        text-decoration: none;
+      }
+
+      .card .meta a,
+      .vcell .meta a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .section.twoCol>* {
+        min-width: 0;
+      }
+
+      .ratio {
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+
+      .ratio iframe {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        border: 0;
+      }
+
+      @supports not (aspect-ratio: 16/9) {
+        .ratio {
+          position: relative;
+          height: 0;
+          padding-top: 56.25%;
+        }
+
+        .ratio iframe {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .section.twoCol>* {
+        min-width: 0;
+      }
+
+      .carousel,
+      .carousel .track {
+        min-width: 0;
+      }
+
+      a.card,
+      a.vcell {
+        display: block;
+        max-width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+      }
+
+      .card .thumb,
+      .vcell .thumb {
+        width: 100%;
+      }
+
+      .card .thumb img,
+      .vcell .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .title {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      @media (max-width: 380px) {
+        .carousel .card {
+          flex-basis: 100%;
+        }
+      }
+
+      .linksRow .btn.iconbtn {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .icon,
+      .icon-img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .label {
+        justify-self: center;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
+    <!-- V2 CSS（新樣式，可以自己調整） -->
+    <style id="css-v2" disabled>
+      :root {
+        --bg: #0f172a;
+        --card: #111827;
+        --muted: #94a3b8;
+        --text: #e2e8f0;
+        --brand: #0ea5e9;
+        --border: rgba(148, 163, 184, .25);
+        --radius: 18px;
+        --maxw: 1100px;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8fafc;
+          --card: #ffffff;
+          --text: #0f172a;
+          --muted: #475569;
+          --border: rgba(2, 6, 23, .1);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Zen Maru Gothic", "Segoe UI", "微軟正黑體", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .wrap {
+        width: min(94vw, var(--maxw));
+        margin: 32px auto 56px;
+      }
+
+      .section {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+      }
+
+      .gap {
+        height: 18px;
+      }
+
+      .logoBox {
+        display: grid;
+        place-items: center;
+        padding: 28px 20px;
+      }
+
+      .logo {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255, 255, 255, .12);
+        box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
+      }
+
+      .linksRow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 720px) {
+        .linksRow {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .btn {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: #1f2937;
+        color: #e5e7eb;
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        transition: transform .06s ease, background .2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: #273446;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 16px;
+      }
+
+      .icon {
+        width: 22px;
+        height: 22px;
+        display: block;
+        fill: currentColor;
+      }
+
+      .iconbtn.-tw {
+        color: #a970ff;
+      }
+
+      .iconbtn.-yt {
+        color: #ff0033;
+      }
+
+      .iconbtn.-shop {
+        color: #22c55e;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 16px;
+      }
+
+      .icon-img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .linksRow .btn.iconbtn {
+        padding: 12px 16px;
+        gap: 10px;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .label {
+        font-weight: 700;
+        letter-spacing: .2px;
+      }
+
+      .twoCol {
+        display: grid;
+        gap: 16px;
+      }
+
+      @media (min-width: 980px) {
+        .twoCol {
+          grid-template-columns: 1.2fr 1fr;
+        }
+      }
+
+      .h2 {
+        margin: 0 0 10px;
+        font-size: clamp(18px, 2.4vw, 22px);
+        letter-spacing: .5px;
+        text-align: center;
+      }
+
+      .carousel {
+        position: relative;
+      }
+
+      .track {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 6px;
+      }
+
+      .card {
+        flex: 0 0 clamp(70%, 420px, 90%);
+        scroll-snap-align: start;
+        border: 1px solid var(--border);
+        background: #0b1220;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      @media (min-width: 720px) {
+        .card {
+          flex-basis: 60%;
+        }
+      }
+
+      @media (min-width: 1100px) {
+        .card {
+          flex-basis: 60%;
+        }
+      }
+
+      .thumb {
+        position: relative;
+        aspect-ratio: 16/9;
+        width: 100%;
+        background: #0a0f1c;
+        display: block;
+      }
+
+      .thumb>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .meta {
+        padding: 12px;
+      }
+
+      .title {
+        font-size: 16px;
+        line-height: 1.35;
+        margin: 0 0 6px;
+      }
+
+      .meta small {
+        color: var(--muted);
+      }
+
+      .navBtn {
+        position: absolute;
+        top: 42%;
+        transform: translateY(-50%);
+        border: 1px solid var(--border);
+        background: rgba(15, 23, 42, .6);
+        color: #e5e7eb;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        backdrop-filter: blur(6px);
+      }
+
+      .navPrev {
+        left: -6px;
+      }
+
+      .navNext {
+        right: -6px;
+      }
+
+      .ratio {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #0b1220;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .ratio iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 720px) {
+        .grid3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1040px) {
+        .grid3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .vcell {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #0b1220;
+      }
+
+      .vcell .thumb {
+        display: block;
+      }
+
+      .vcell .meta {
+        padding: 10px 12px;
+      }
+
+      .more {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 18px;
+      }
+
+      .carousel .track {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .carousel .track::-webkit-scrollbar {
+        height: 0
+      }
+
+      .carousel:hover .track,
+      .carousel:focus-within .track {
+        padding-bottom: 6px;
+        scrollbar-width: thin;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar,
+      .carousel:focus-within .track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar-thumb,
+      .carousel:focus-within .track::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, .5);
+        border-radius: 999px;
+      }
+
+      .carousel:hover .track::-webkit-scrollbar-track,
+      .carousel:focus-within .track::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .carousel .navBtn {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s
+      }
+
+      .carousel:hover .navBtn {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      a.card,
+      a.vcell {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a.card:link,
+      a.card:visited,
+      a.card:hover,
+      a.card:active,
+      a.vcell:link,
+      a.vcell:visited,
+      a.vcell:hover,
+      a.vcell:active {
+        text-decoration: none;
+      }
+
+      .card .meta a,
+      .vcell .meta a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .section.twoCol>* {
+        min-width: 0;
+      }
+
+      .ratio {
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+
+      .ratio iframe {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+        border: 0;
+      }
+
+      @supports not (aspect-ratio: 16/9) {
+        .ratio {
+          position: relative;
+          height: 0;
+          padding-top: 56.25%;
+        }
+
+        .ratio iframe {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .section.twoCol>* {
+        min-width: 0;
+      }
+
+      .carousel,
+      .carousel .track {
+        min-width: 0;
+      }
+
+      a.card,
+      a.vcell {
+        display: block;
+        max-width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+      }
+
+      .card .thumb,
+      .vcell .thumb {
+        width: 100%;
+      }
+
+      .card .thumb img,
+      .vcell .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .title {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      @media (max-width: 380px) {
+        .carousel .card {
+          flex-basis: 100%;
+        }
+      }
+
+      .linksRow .btn.iconbtn {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .icon,
+      .icon-img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .label {
+        justify-self: center;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>undefined<body>
+    <div class="wrap">
+      <section class="section">
+        <div class="linksRow">
+          <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch" style="color:#c4a2ff">
+            <img class="icon" src="https://cdn.simpleicons.org/twitch/9146FF" alt="">
+            <span class="label">Twitch 頻道 (每晚七點開台)</span>
+          </a>
+          <a class="btn iconbtn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube" style="color:#ff7a7a">
+            <img class="icon" src="https://cdn.simpleicons.org/youtube/FF0000" alt="">
+            <span class="label">YT 頻道 (Cover與活動記錄)</span>
+          </a>
+          <a class="btn iconbtn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener" aria-label="賣場＋" style="color:#86efac">
+            <img class="icon" src="https://api.iconify.design/lucide:shopping-bag.svg?color=%2322c55e" alt="">
+            <span class="label">雷虎雜貨舖 好賣+分店</span>
+          </a>
+        </div>
+      </section>
+      <div class="gap"></div>
+      <h2 class="h2">最新YT影片 & Twitch直播</h2>
+      <section class="section twoCol">
+        <div>
+          <div class="carousel">
+            <div class="track" id="yt-track"></div>
+          </div>
+        </div>
+        <div>
+          <div class="ratio">
+            <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" title="Twitch Player"></iframe>
+          </div>
+        </div>
+      </section>
+      <div class="gap"></div>
+      <h2 class="h2">Cover</h2>
+      <section class="section" id="pl-section">
+        <div class="grid3" id="pl-grid"></div>
+        <div class="more">
+          <button class="btn" id="pl-more" style="display:none">載入更多</button>
+        </div>
+      </section>
+    </div>
+    <script>
+      (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const v = urlParams.get("v") || "1";
+        document.querySelectorAll('[id^="css-v"]').forEach(el => {
+          el.disabled = (el.id !== "css-v" + v);
+        });
+      })();
+    </script>
+    <script>
+      const CONFIG = {
+        logoUrl: '',
+        twitchChannel: 'leihustore',
+        playlist: {
+          id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny',
+          pageSize: 20
+        },
+        youtube: {
+          channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
+          apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg',
+          maxResults: 20,
+          manualVideoIds: ['T9UcKMO3tKc', 'K9urc-JaKO8', '4eYiLJh3dzg', '0l1d1z2W19o', 'RZNY-lcLUrk', '5gjwjCB1Y4E']
+        }
+      };
+      if (CONFIG.logoUrl) {
+        document.getElementById('logo').src = CONFIG.logoUrl;
+      }
+      async function fetchPlaylistPage(pageToken) {
+          const pl = CONFIG.playlist || {};
+          const key = (CONFIG.youtube || {}).apiKey;
+          if (!pl.id || !key) return {
+            items: [],
+            nextPageToken: null
+          };
+          const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+          url.searchParams.set('key', key);
+          url.searchParams.set('playlistId', pl.id);
+          url.searchParams.set('part', 'snippet,contentDetails');
+          url.searchParams.set('maxResults', String(Math.min(pl.pageSize || 20, 50)));
+          if (pageToken) url.searchParams.set('pageToken', pageToken);
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('YouTube API 錯誤');
+          const data = await res.json();
+          const items = (data.items || []).map(v => ({
+            id: (v.contentDetails || v.snippet?.resourceId)?.videoId,
+            title: v.snippet?.title || 'YouTube 影片'
+          })).filter(x => x.id);
+          return {
+            items,
+            nextPageToken: data.nextPageToken || null
+          };
+        }
+        (function initTwitch() {
+          const parent = location.hostname || 'www.example.com';
+          const src = new URL('https://player.twitch.tv/');
+          src.searchParams.set('channel', CONFIG.twitchChannel);
+          src.searchParams.set('parent', parent);
+          src.searchParams.set('autoplay', 'false');
+          src.searchParams.set('muted', 'true');
+          document.getElementById('twitchPlayer').src = src.toString();
+        })();
+      async function fetchLatestVideoIds() {
+        const {
+          apiKey,
+          channelId,
+          maxResults,
+          manualVideoIds
+        } = CONFIG.youtube;
+        if (!apiKey) {
+          return manualVideoIds.map(id => ({
+            id,
+            title: ''
+          }));
+        }
+        try {
+          const url = new URL('https://www.googleapis.com/youtube/v3/search');
+          url.searchParams.set('key', apiKey);
+          url.searchParams.set('channelId', channelId);
+          url.searchParams.set('part', 'snippet');
+          url.searchParams.set('order', 'date');
+          url.searchParams.set('type', 'video');
+          url.searchParams.set('maxResults', String(maxResults));
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('YouTube API 錯誤');
+          const data = await res.json();
+          return data.items.map(v => ({
             id: v.id && v.id.videoId,
             title: v.snippet?.title || ''
-          }))
-          .filter(v => !!v.id);
-      } catch (err) {
-        console.warn('[YouTube] 讀取失敗，改用手動清單', err);
-        return CONFIG.youtube.manualVideoIds.map(id => ({ id, title: '' }));
-      }
-    }
-
-    async function fetchPlaylistAll(playlistId, limit = Infinity){
-      const { apiKey } = CONFIG.youtube;
-      if (!apiKey || !playlistId) return [];
-      let out = [];
-      let pageToken = null;
-      do {
-        const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
-        url.searchParams.set('key', apiKey);
-        url.searchParams.set('playlistId', playlistId);
-        url.searchParams.set('part', 'snippet,contentDetails');
-        url.searchParams.set('maxResults', '50');       // 一次最多 50
-        if (pageToken) url.searchParams.set('pageToken', pageToken);
-    
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('YouTube API 錯誤');
-        const data = await res.json();
-    
-        const items = (data.items || []).map(v => {
-          const id = (v.contentDetails || v.snippet?.resourceId)?.videoId;
-          const title = v.snippet?.title || '';
-          const published = v.contentDetails?.videoPublishedAt || v.snippet?.publishedAt || 0;
-          return id ? { id, title, published: new Date(published) } : null;
-        }).filter(Boolean);
-    
-        out.push(...items);
-        pageToken = data.nextPageToken || null;
-    
-        if (out.length >= limit) break;
-      } while (pageToken);
-      out.sort((a, b) => b.published - a.published);
-      return limit === Infinity ? out : out.slice(0, limit);
-    }
-
-    async function initPlaylistSection(){
-      const sec  = document.getElementById('pl-section');
-      const grid = document.getElementById('pl-grid');
-      const more = document.getElementById('pl-more');
-      const pl   = CONFIG.playlist || {};
-      const key  = (CONFIG.youtube||{}).apiKey;
-    
-      if (!sec || !grid || !more || !pl.id || !key) {
-        if (sec) sec.style.display = 'none';
-        return;
-      }
-    
-      let cache = [];
-      let idx = 0;
-      const PAGE = pl.pageSize || 9;
-    
-      function renderMore(){
-        const slice = cache.slice(idx, idx + PAGE);
-        slice.forEach(v => grid.appendChild(createGridCell(v.id, v.title)));
-        idx += slice.length;
-        more.style.display = idx < cache.length ? 'inline-flex' : 'none';
-      }
-    
-      try {
-        cache = await fetchPlaylistAll(pl.id);
-        const EXTRA_ID = '3FH7rxGP7aE';
-        const EXTRA_TITLE = '劉若英 - 繼續 給十五歲的自己 / 演唱 肯茲 (Vocal Cover) / FurTone Power'; // 想顯示正式標題可改這行
-
-        // 若清單內沒有，就加在最後
-        if (!cache.some(v => v.id === EXTRA_ID)) {
-          cache.push({ id: EXTRA_ID, title: EXTRA_TITLE, published: new Date(0) });
+          })).filter(v => !!v.id);
+        } catch (err) {
+          console.warn('[YouTube] 讀取失敗，改用手動清單', err);
+          return CONFIG.youtube.manualVideoIds.map(id => ({
+            id,
+            title: ''
+          }));
         }
-        renderMore();                     
-        more.addEventListener('click', renderMore);
-      } catch (e) {
-        console.warn('載入播放清單失敗', e);
-        more.style.display = 'none';
       }
-    }
+      async function fetchPlaylistAll(playlistId, limit = Infinity) {
+        const {
+          apiKey
+        } = CONFIG.youtube;
+        if (!apiKey || !playlistId) return [];
+        let out = [];
+        let pageToken = null;
+        do {
+          const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+          url.searchParams.set('key', apiKey);
+          url.searchParams.set('playlistId', playlistId);
+          url.searchParams.set('part', 'snippet,contentDetails');
+          url.searchParams.set('maxResults', '50'); // 一次最多 50
+          if (pageToken) url.searchParams.set('pageToken', pageToken);
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('YouTube API 錯誤');
+          const data = await res.json();
+          const items = (data.items || []).map(v => {
+            const id = (v.contentDetails || v.snippet?.resourceId)?.videoId;
+            const title = v.snippet?.title || '';
+            const published = v.contentDetails?.videoPublishedAt || v.snippet?.publishedAt || 0;
+            return id ? {
+              id,
+              title,
+              published: new Date(published)
+            } : null;
+          }).filter(Boolean);
+          out.push(...items);
+          pageToken = data.nextPageToken || null;
+          if (out.length >= limit) break;
+        } while (pageToken);
+        out.sort((a, b) => b.published - a.published);
+        return limit === Infinity ? out : out.slice(0, limit);
+      }
+      async function initPlaylistSection() {
+        const sec = document.getElementById('pl-section');
+        const grid = document.getElementById('pl-grid');
+        const more = document.getElementById('pl-more');
+        const pl = CONFIG.playlist || {};
+        const key = (CONFIG.youtube || {}).apiKey;
+        if (!sec || !grid || !more || !pl.id || !key) {
+          if (sec) sec.style.display = 'none';
+          return;
+        }
+        let cache = [];
+        let idx = 0;
+        const PAGE = pl.pageSize || 9;
 
-    function ytThumb(id){
-      return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-    }
+        function renderMore() {
+          const slice = cache.slice(idx, idx + PAGE);
+          slice.forEach(v => grid.appendChild(createGridCell(v.id, v.title)));
+          idx += slice.length;
+          more.style.display = idx < cache.length ? 'inline-flex' : 'none';
+        }
+        try {
+          cache = await fetchPlaylistAll(pl.id);
+          const EXTRA_ID = '3FH7rxGP7aE';
+          const EXTRA_TITLE = '劉若英 - 繼續 給十五歲的自己 / 演唱 肯茲 (Vocal Cover) / FurTone Power'; // 想顯示正式標題可改這行
+          // 若清單內沒有，就加在最後
+          if (!cache.some(v => v.id === EXTRA_ID)) {
+            cache.push({
+              id: EXTRA_ID,
+              title: EXTRA_TITLE,
+              published: new Date(0)
+            });
+          }
+          renderMore();
+          more.addEventListener('click', renderMore);
+        } catch (e) {
+          console.warn('載入播放清單失敗', e);
+          more.style.display = 'none';
+        }
+      }
 
-    function createCard(id, title){
-      const a = document.createElement('a');
-      a.href = `https://www.youtube.com/watch?v=${id}`;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'card';
-      a.innerHTML = `
-        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
+      function ytThumb(id) {
+        return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+      }
+
+      function createCard(id, title) {
+        const a = document.createElement('a');
+        a.href = `https://www.youtube.com/watch?v=${id}`;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'card';
+        a.innerHTML = `
+        
+        <span class="thumb">
+          <img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" />
+        </span>
         <div class="meta">
           <p class="title">${title || 'YouTube 影片'}</p>
         </div>`;
-      return a;
-    }
+        return a;
+      }
 
-    function createGridCell(id, title){
-      const a = document.createElement('a');
-      a.href = `https://www.youtube.com/watch?v=${id}`;
-      a.target = '_blank'; a.rel = 'noopener';
-      a.className = 'vcell';
-      a.innerHTML = `
-        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
-        <div class="meta"><p class="title">${title || 'YouTube 影片'}</p></div>`;
-      return a;
-    }
+      function createGridCell(id, title) {
+        const a = document.createElement('a');
+        a.href = `https://www.youtube.com/watch?v=${id}`;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'vcell';
+        a.innerHTML = `
+        
+        <span class="thumb">
+          <img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" />
+        </span>
+        <div class="meta">
+          <p class="title">${title || 'YouTube 影片'}</p>
+        </div>`;
+        return a;
+      }
 
-    function bindCarouselNav(){
-      const track = document.getElementById('yt-track');
-      const prev = document.querySelector('.navPrev');
-      const next = document.querySelector('.navNext');
-      const step = () => track.clientWidth * 0.9;
-      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-    }
-
-    async function init(){
-      const videos = await fetchLatestVideoIds();
-      const track = document.getElementById('yt-track');
-      const grid = document.getElementById('yt-grid');
-      const head = videos.slice(0, 20);
-      head.forEach(v => track.appendChild(createCard(v.id, v.title)));
-    }
-
-    init();
-    initPlaylistSection();
-  </script>
-</body>
+      function bindCarouselNav() {
+        const track = document.getElementById('yt-track');
+        const prev = document.querySelector('.navPrev');
+        const next = document.querySelector('.navNext');
+        const step = () => track.clientWidth * 0.9;
+        prev.addEventListener('click', () => track.scrollBy({
+          left: -step(),
+          behavior: 'smooth'
+        }));
+        next.addEventListener('click', () => track.scrollBy({
+          left: step(),
+          behavior: 'smooth'
+        }));
+      }
+      async function init() {
+        const videos = await fetchLatestVideoIds();
+        const track = document.getElementById('yt-track');
+        const grid = document.getElementById('yt-grid');
+        const head = videos.slice(0, 20);
+        head.forEach(v => track.appendChild(createCard(v.id, v.title)));
+      }
+      init();
+      initPlaylistSection();
+    </script>
+  </body>
 </html>
