@@ -525,6 +525,7 @@
           border-radius: 12px;
           overflow: visible;
           text-decoration: none;
+          animation: floatY 3s ease-in-out infinite; /* 加上上下飄動動畫 */
         }
         .promo-badge img {
           width: 100px;           /* 調整角落尺寸 */
@@ -562,11 +563,14 @@
           opacity: 1;
           transform: translateY(-12px);
         }
-
+        @keyframes floatY {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); } /* 往上飄 12px */
+        }
         /* 小螢幕自動縮小 */
         @media (max-width: 480px) {
           .promo-badge { right: 12px; bottom: 12px; }
-          .promo-badge img { width: 56px; border-radius: 10px; }
+          .promo-badge img { width: 96px; border-radius: 10px; }
         }
 
         /* 無動作偏好支援 */
@@ -1991,7 +1995,6 @@
       target="_blank"
       rel="noopener noreferrer"
       aria-label="前往 Think2，優惠碼：leihu2509"
-      title="leihu2509"  <!-- 原生瀏覽器提示的備援 -->
     >
       <img src="https://r2.fivemanage.com/SOCMzwDICOTddx7yxSslN/think2.png" alt="Think2" />
     </a>
