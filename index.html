@@ -522,7 +522,7 @@
           z-index: 2147483000;   /* 很高，確保不被蓋住 */
           display: inline-block;
           line-height: 0;
-          border-radius: 12px;
+          /*border-radius: 12px;*/
           overflow: visible;
           text-decoration: none;
           animation: floatY 3s ease-in-out infinite; /* 加上上下飄動動畫 */
@@ -531,8 +531,8 @@
           width: 100px;           /* 調整角落尺寸 */
           height: auto;
           display: block;
-          border-radius: 12px;
-          box-shadow: 0 6px 18px rgba(0,0,0,.25);
+          /*border-radius: 12px;*/
+          /*box-shadow: 0 6px 18px rgba(0,0,0,.25);*/
           transition: transform .2s ease, box-shadow .2s ease;
         }
         .promo-badge:hover img {
@@ -570,15 +570,15 @@
         /* 小螢幕自動縮小 */
         @media (max-width: 480px) {
           .promo-badge { right: 12px; bottom: 12px; }
-          .promo-badge img { width: 96px; border-radius: 10px; }
+          /*.promo-badge img { width: 96px; border-radius: 10px; }*/
+          .promo-badge img { width: 96px;}
         }
 
         /* 無動作偏好支援 */
         @media (prefers-reduced-motion: reduce) {
           .promo-badge img,
-          .promo-badge::after {
-            transition: none;
-          }
+          .promo-badge::after {transition: none;}
+          .promo-badge { animation: none; }
         }
 
 
