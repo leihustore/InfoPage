@@ -11,7 +11,6 @@
     <meta property="og:image" content="https://i.imgur.com/2ZC3F2i.png" />
     <meta name="theme-color" content="#0ea5e9" />
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- V1 CSS（舊版：原本的樣式） -->
     <style id="css-v1">
       :root {
         --bg: #0f172a;
@@ -515,8 +514,71 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
+      .promo-badge {
+          position: fixed;
+          right: 16px;           /* 想放左邊改成 left: 16px; 並移除 right */
+          bottom: 16px;          /* 想改到右上角可用 top:16px; 並移除 bottom */
+          z-index: 2147483000;   /* 很高，確保不被蓋住 */
+          display: inline-block;
+          line-height: 0;
+          border-radius: 12px;
+          overflow: visible;
+          text-decoration: none;
+        }
+        .promo-badge img {
+          width: 100px;           /* 調整角落尺寸 */
+          height: auto;
+          display: block;
+          border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0,0,0,.25);
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .promo-badge:hover img {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(0,0,0,.35);
+        }
+
+        /* 自訂 Tooltip（滑鼠移上去顯示優惠碼） */
+        .promo-badge::after {
+          content: "leihu2509";
+          position: absolute;
+          right: 0;               /* 放左邊時可改 left:0; 並移除 right */
+          bottom: 100%;
+          transform: translateY(-8px);
+          white-space: nowrap;
+          font: 500 12px/1.2 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+          color: #0f172a;
+          background: #e2e8f0;
+          border: 1px solid rgba(2,6,23,.12);
+          padding: 6px 8px;
+          border-radius: 8px;
+          box-shadow: 0 6px 16px rgba(0,0,0,.15);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity .15s ease, transform .15s ease;
+        }
+        .promo-badge:hover::after {
+          opacity: 1;
+          transform: translateY(-12px);
+        }
+
+        /* 小螢幕自動縮小 */
+        @media (max-width: 480px) {
+          .promo-badge { right: 12px; bottom: 12px; }
+          .promo-badge img { width: 56px; border-radius: 10px; }
+        }
+
+        /* 無動作偏好支援 */
+        @media (prefers-reduced-motion: reduce) {
+          .promo-badge img,
+          .promo-badge::after {
+            transition: none;
+          }
+        }
+
+
     </style>
-    <!-- V2 CSS（新樣式，可以自己調整） -->
     <style id="css-v2" disabled>
       :root {
         --bg: #f1f5f9;
@@ -528,6 +590,67 @@
         --radius: 18px;
         --maxw: 1100px;
       }
+      .promo-badge {
+          position: fixed;
+          right: 16px;           /* 想放左邊改成 left: 16px; 並移除 right */
+          bottom: 16px;          /* 想改到右上角可用 top:16px; 並移除 bottom */
+          z-index: 2147483000;   /* 很高，確保不被蓋住 */
+          display: inline-block;
+          line-height: 0;
+          border-radius: 12px;
+          overflow: visible;
+          text-decoration: none;
+        }
+        .promo-badge img {
+          width: 72px;           /* 調整角落尺寸 */
+          height: auto;
+          display: block;
+          border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0,0,0,.25);
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .promo-badge:hover img {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(0,0,0,.35);
+        }
+
+        /* 自訂 Tooltip（滑鼠移上去顯示優惠碼） */
+        .promo-badge::after {
+          content: "leihu2509";
+          position: absolute;
+          right: 0;               /* 放左邊時可改 left:0; 並移除 right */
+          bottom: 100%;
+          transform: translateY(-8px);
+          white-space: nowrap;
+          font: 500 12px/1.2 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+          color: #0f172a;
+          background: #e2e8f0;
+          border: 1px solid rgba(2,6,23,.12);
+          padding: 6px 8px;
+          border-radius: 8px;
+          box-shadow: 0 6px 16px rgba(0,0,0,.15);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity .15s ease, transform .15s ease;
+        }
+        .promo-badge:hover::after {
+          opacity: 1;
+          transform: translateY(-12px);
+        }
+
+        /* 小螢幕自動縮小 */
+        @media (max-width: 480px) {
+          .promo-badge { right: 12px; bottom: 12px; }
+          .promo-badge img { width: 56px; border-radius: 10px; }
+        }
+
+        /* 無動作偏好支援 */
+        @media (prefers-reduced-motion: reduce) {
+          .promo-badge img,
+          .promo-badge::after {
+            transition: none;
+          }
+        }
 
       @media (prefers-color-scheme: dark) {
         :root {
@@ -1091,6 +1214,67 @@
         box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
       }
 
+      .promo-badge {
+          position: fixed;
+          right: 16px;           /* 想放左邊改成 left: 16px; 並移除 right */
+          bottom: 16px;          /* 想改到右上角可用 top:16px; 並移除 bottom */
+          z-index: 2147483000;   /* 很高，確保不被蓋住 */
+          display: inline-block;
+          line-height: 0;
+          border-radius: 12px;
+          overflow: visible;
+          text-decoration: none;
+        }
+        .promo-badge img {
+          width: 72px;           /* 調整角落尺寸 */
+          height: auto;
+          display: block;
+          border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0,0,0,.25);
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .promo-badge:hover img {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(0,0,0,.35);
+        }
+
+        /* 自訂 Tooltip（滑鼠移上去顯示優惠碼） */
+        .promo-badge::after {
+          content: "leihu2509";
+          position: absolute;
+          right: 0;               /* 放左邊時可改 left:0; 並移除 right */
+          bottom: 100%;
+          transform: translateY(-8px);
+          white-space: nowrap;
+          font: 500 12px/1.2 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+          color: #0f172a;
+          background: #e2e8f0;
+          border: 1px solid rgba(2,6,23,.12);
+          padding: 6px 8px;
+          border-radius: 8px;
+          box-shadow: 0 6px 16px rgba(0,0,0,.15);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity .15s ease, transform .15s ease;
+        }
+        .promo-badge:hover::after {
+          opacity: 1;
+          transform: translateY(-12px);
+        }
+
+        /* 小螢幕自動縮小 */
+        @media (max-width: 480px) {
+          .promo-badge { right: 12px; bottom: 12px; }
+          .promo-badge img { width: 56px; border-radius: 10px; }
+        }
+
+        /* 無動作偏好支援 */
+        @media (prefers-reduced-motion: reduce) {
+          .promo-badge img,
+          .promo-badge::after {
+            transition: none;
+          }
+        }
       .linksRow {
         display: grid;
         grid-template-columns: 1fr;
@@ -1525,7 +1709,9 @@
         text-overflow: ellipsis;
       }
     </style>
-  </head><body>
+  </head>
+
+  <body>
     <div class="wrap">
       <section class="section">
         <div class="linksRow">
@@ -1799,5 +1985,15 @@
       init();
       initPlaylistSection();
     </script>
+    <a
+      class="promo-badge"
+      href="https://www.think2tw.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="前往 Think2，優惠碼：leihu2509"
+      title="leihu2509"  <!-- 原生瀏覽器提示的備援 -->
+    >
+      <img src="https://r2.fivemanage.com/SOCMzwDICOTddx7yxSslN/think2.png" alt="Think2" />
+    </a>
   </body>
 </html>
