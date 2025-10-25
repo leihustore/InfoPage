@@ -627,7 +627,7 @@
           bottom: 100%;
           transform: translateY(-8px);
           white-space: nowrap;
-          font: 500 24px/1.2 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+          font: 500 12px/1.2 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
           color: #0f172a;
           background: #e2e8f0;
           border: 1px solid rgba(2,6,23,.12);
@@ -1245,7 +1245,7 @@
 
         /* 自訂 Tooltip（滑鼠移上去顯示優惠碼） */
         .promo-badge::after {
-          content: "leihu2510";
+          content: "leihu2509";
           position: absolute;
           right: 0;               /* 放左邊時可改 left:0; 並移除 right */
           bottom: 100%;
@@ -1767,6 +1767,36 @@
       })();
     </script>
     <script>
+      (function () {
+        // 取本機時間的兩位數年份與兩位數月份（01~12）
+        const now = new Date();
+        const yy = String(now.getFullYear()).slice(-2);
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const code = `leihu${yy}${mm}`;
+
+        // 1) 更新角落貼紙連結的 sl-ref 參數與 aria-label
+        const badge = document.querySelector(".promo-badge");
+        if (badge) {
+          try {
+            const u = new URL(badge.href);
+            u.searchParams.set("sl-ref", code);
+            badge.href = u.toString();
+          } catch (e) { /* 若 href 不是絕對網址也沒關係，略過 */ }
+          badge.setAttribute("aria-label", `前往 Think2，優惠碼：${code}`);
+        }
+
+        // 2) 覆蓋任何主題（v1/v2/v3）下的 tooltip 文字
+        //    直接用更高優先層的 style 來改 ::after 的 content
+        const style = document.createElement("style");
+        style.id = "promo-code-runtime";
+        style.textContent = `.promo-badge::after { content: "推薦碼 ${code}"; }`;
+        document.head.appendChild(style);
+      })();
+    </script>
+
+
+    
+    <script>
       const CONFIG = {
         logoUrl: '',
         twitchChannel: 'leihustore',
@@ -1995,7 +2025,7 @@
       href="https://www.think2tw.com/?sl-ref=leihu2510"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="前往 Think2，優惠碼：leihu2510"
+      aria-label="前往 Think2，優惠碼：leihu2509"
     >
       <img src="https://r2.fivemanage.com/SOCMzwDICOTddx7yxSslN/think2.png" alt="Think2" />
     </a>
